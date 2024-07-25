@@ -8,7 +8,7 @@
 void DeployResNet18() {
   // load the ResNet18 library
   DLDevice dev{kDLCPU, 0};
-  tvm::runtime::Module mod_factory = tvm::runtime::Module::LoadFromFile("/root/data/demo_tvm/test_resnet18.so");
+  tvm::runtime::Module mod_factory = tvm::runtime::Module::LoadFromFile("test_resnet18.so");
   
   // create the ResNet18 module
   tvm::runtime::Module resnet18_mod = mod_factory.GetFunction("default")(dev);
