@@ -1,6 +1,8 @@
 # TVM DEMO
+基于tvm 0.18
+
 ## 安装依赖环境
-`pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 ## 安装tvm
 参考: https://siwrc302o4r.feishu.cn/wiki/OB63wVvo1ih0iukOVSWcKDJwneg
@@ -33,7 +35,6 @@ cat.jpg: 285
 cat.jpg score:0.4857271611690521
 infer 100 cost average: 0.39994378328323366
 ```
-
 ### 使用tvm(GPU)推理
 ```
 tvmc compile --target cuda resnet18.onnx -o resnet18-cuda.tar
@@ -46,5 +47,9 @@ dtype_dict:{'input': 'float32'}
 cat.jpg: 285
 cat.jpg score:0.48572424054145813
 infer 100 cost average: 0.019815213680267334
+
+```
+### 使用TVM(CPU)，C++推理
+```
 
 ```
