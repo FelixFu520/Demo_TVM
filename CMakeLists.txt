@@ -17,16 +17,32 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(TVM_ROOT "${CMAKE_SOURCE_DIR}/third_party/tvm")
 set(DMLC_CORE "${TVM_ROOT}/3rdparty/dmlc-core")
 
+# Add TVM include directories
 include_directories(SYSTEM "${TVM_ROOT}/include")
 include_directories(SYSTEM "${TVM_ROOT}/3rdparty/dlpack/include")
 include_directories(SYSTEM "${TVM_ROOT}/3rdparty/dmlc-core/include")
 include_directories(SYSTEM "${TVM_ROOT}/3rdparty/rang/include")
 include_directories(SYSTEM "${TVM_ROOT}/3rdparty/compiler-rt")
 include_directories(SYSTEM "${TVM_ROOT}/3rdparty/picojson")
-
+# Add TVM library directories
 link_directories("${TVM_ROOT}/build/Release")
+# Add Logging library
+# add_definitions("-DDMLC_USE_LOGGING_LIBRARY=<tvm/runtime/logging.h>")
 
-add_definitions("-DDMLC_USE_LOGGING_LIBRARY=<tvm/runtime/logging.h>")
+# Find Opencv
+find_package(OpenCV REQUIRED)
+message(STATUS "OpenCV version: ${OpenCV_VERSION}")
+include_directories(${OpenCV_INCLUDE_DIRS})
+message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
 
-add_executable(demo_tvm main.cpp)
-target_link_libraries(demo_tvm PRIVATE tvm_runtime tvm)
+# Copy Files
+file(COPY ${TVM_ROOT}/build/libtvm_runtime.so DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(COPY ${TVM_ROOT}/build/libtvm.so DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(COPY ${CMAKE_SOURCE_DIR}/resnet18-cpu DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(COPY ${CMAKE_SOURCE_DIR}/resnet18-cuda DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(COPY ${CMAKE_SOURCE_DIR}/cat.jpg DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+add_executable(demo_tvm_cpu tvm_demo_cpu.cpp)
+# add_executable(demo_tvm_cuda demo_tvm_cuda.cpp)
+target_link_libraries(demo_tvm_cpu PRIVATE tvm ${OpenCV_LIBS})
+# target_link_libraries(demo_tvm_cuda PRIVATE tvm_runtime tvm)

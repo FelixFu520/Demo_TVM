@@ -1,6 +1,8 @@
 # Mine
 third_party/tvm
 build/
+resnet18-cpu/
+resnet18-cuda/
 *.onnx
 *.tar
 
