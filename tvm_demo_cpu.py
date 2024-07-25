@@ -28,6 +28,7 @@ mean = [0.485, 0.456, 0.406]
 std = [0.229, 0.224, 0.225]
 image = cv2.imread("cat.jpg")
 image = cv2.resize(image, (224, 224))
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 image = image / 255.0
 image = image - mean
 image = image / std
