@@ -52,15 +52,12 @@ infer 100 cost average: 0.019815213680267334
 ### 使用TVM(CPU)，C++推理
 ```
 apt-get install libopencv-dev
-mkdir resnet18-cpu
-mkdir resnet18-cuda
-tar -xvf resnet18-cpu.tar -C resnet18-cpu
+tar -xvf resnet18-cpu.tar
 
 ```
 ### 使用TVM(CUDA)，C++推理
 ```
-mkdir resnet18-cuda
-tar -xvf resnet18-cuda.tar -C resnet18-cuda
+tar -xvf resnet18-cuda.tar
 
 
 ```

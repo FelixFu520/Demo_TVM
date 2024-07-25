@@ -5,6 +5,9 @@ resnet18-cpu/
 resnet18-cuda/
 *.onnx
 *.tar
+mod.so
+mod.json
+mod.params
 
 # Prerequisites
 *.d
