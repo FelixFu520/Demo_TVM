@@ -1,5 +1,6 @@
 # Mine
 third_party/tvm
+third_party/TensorRT-8.6.0.12
 build/
 resnet18-cpu/
 resnet18-cuda/
@@ -8,6 +9,7 @@ resnet18-cuda/
 mod.so
 mod.json
 mod.params
+resnet18.trt
 
 # Prerequisites
 *.d

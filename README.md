@@ -1,5 +1,40 @@
 # TVM DEMO
-基于tvm 0.18
+各个库版本说明
+```
+cmake --version
+cmake version 3.30.1
+
+gcc -v
+gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.2)
+
+make -v
+GNU Make 4.2.1
+
+python -V
+Python 3.8.10
+
+tvmc --version
+0.18.dev0
+
+pkg-config --modversion zlib
+1.3.1
+
+nvcc -V
+Cuda compilation tools, release 11.3, V11.3.109
+
+find / -name libnccl
+root@3a867420f6ac:~/data/demo_tvm# dpkg -l | grep nccl
+hi  libnccl-dev                          2.9.9-1+cuda11.3                      amd64        NVIDIA Collective Communication Library (NCCL) Development Files
+hi  libnccl2                             2.9.9-1+cuda11.3                      amd64        NVIDIA Collective Communication Library (NCCL) Runtime
+
+python -c "import torch; print(torch.__version__)"
+1.12.1+cu113
+
+python -c "import torch; print(torch.cuda.is_available())"
+True
+
+
+```
 
 ## 安装依赖环境
 `pip install -r requirements.txt`
@@ -7,7 +42,13 @@
 ## 安装tvm
 参考: https://siwrc302o4r.feishu.cn/wiki/OB63wVvo1ih0iukOVSWcKDJwneg
 安装完毕后, 将tvm复制到third_party目录下。 记得安装tvm的python包
+## 安装TensorRT
+为了对比速度, 装了下TensorRT(8.6.0.12), 下载[安装包](https://pan.baidu.com/s/1l72iuoL74s_omZ1jCa18kQ?pwd=054e), 放到third_party目录下
 
+```
+tar -xvf TensorRT-8.6.0.12.Linux.x86_64-gnu.cuda-11.8.tar.gz
+
+```
 ## 运行
 ### 获取onnx模型
 ```
@@ -39,7 +80,7 @@ cat.jpg: 281
 cat.jpg score:0.5740503668785095
 infer 100 cost average: 0.01991621971130371
 ```
-### 使用TVM(CPU/CUDA)，C++推理
+### 使用TVM(CPU/CUDA), TensorRT(CUDA), C++推理
 ```
 apt-get install libopencv-dev
 tvmc compile --target llvm resnet18.onnx -o resnet18-cpu.tar # 这种编译出来模型在C++中用不了, 应该是参数设置问题, 待解决
@@ -79,6 +120,20 @@ Batch 1: 287, 0.015327
 Batch 1: 728, 0.013453
 infer 100 cost time: 0.019427
 
+./demo_trt
+******Top 5:
+Batch 0: 281, 0.573568
+Batch 0: 285, 0.174928
+Batch 0: 282, 0.168227
+Batch 0: 287, 0.015526
+Batch 0: 728, 0.013489
+******Top 5:
+Batch 1: 281, 0.573568
+Batch 1: 285, 0.174928
+Batch 1: 282, 0.168227
+Batch 1: 287, 0.015526
+Batch 1: 728, 0.013489
+infer 100 cost time: 0.002790
 ```
 
 ## 参考
