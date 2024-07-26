@@ -113,7 +113,17 @@ int main(void) {
       }
     }
 
+
+
   }
 
+  // 统计时间
+  auto start = cv::getTickCount();
+  for(int i=0;i<100;i++){
+    run();
+  }
+  auto end = cv::getTickCount();
+  double time = (end - start) / cv::getTickFrequency() / 100;
+  printf("infer 100 cost time: %f\n", time);
   return 0;
 }

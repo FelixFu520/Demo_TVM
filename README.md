@@ -46,7 +46,7 @@ tvmc compile --target llvm resnet18.onnx -o resnet18-cpu.tar # 这种编译出�
 python compile_onnx_cpu.py  # 改变模型编译方式
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_BUILD_TYPE="Release" ..
 make
 cd bin
 ./demo_tvm_cpu
@@ -56,6 +56,13 @@ Batch 0: 285, 0.174399
 Batch 0: 282, 0.168115
 Batch 0: 287, 0.015327
 Batch 0: 728, 0.013453
+******Top 5:
+Batch 1: 281, 0.574050
+Batch 1: 285, 0.174399
+Batch 1: 282, 0.168115
+Batch 1: 287, 0.015327
+Batch 1: 728, 0.013453
+infer 100 cost time: 0.198359
 
 
 ```
