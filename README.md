@@ -39,16 +39,16 @@ cat.jpg: 281
 cat.jpg score:0.5740503668785095
 infer 100 cost average: 0.01991621971130371
 ```
-### 使用TVM(CPU)，C++推理
+### 使用TVM(CPU/CUDA)，C++推理
 ```
 apt-get install libopencv-dev
 tvmc compile --target llvm resnet18.onnx -o resnet18-cpu.tar # 这种编译出来模型在C++中用不了, 应该是参数设置问题, 待解决
 python compile_onnx_cpu.py  # 改变模型编译方式
+python_compile_onnx_cuda.py
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE="Release" ..
 make
-cd bin
 ./demo_tvm_cpu
 ******Top 5:
 Batch 0: 281, 0.574050
@@ -64,12 +64,20 @@ Batch 1: 287, 0.015327
 Batch 1: 728, 0.013453
 infer 100 cost time: 0.198359
 
-
-```
-### 使用TVM(CUDA)，C++推理
-```
-tar -xvf resnet18-cuda.tar
-
+./demo_tvm_cuda
+******Top 5:
+Batch 0: 281, 0.574050
+Batch 0: 285, 0.174398
+Batch 0: 282, 0.168116
+Batch 0: 287, 0.015327
+Batch 0: 728, 0.013453
+******Top 5:
+Batch 1: 281, 0.574050
+Batch 1: 285, 0.174398
+Batch 1: 282, 0.168116
+Batch 1: 287, 0.015327
+Batch 1: 728, 0.013453
+infer 100 cost time: 0.019427
 
 ```
 
