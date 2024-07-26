@@ -17,42 +17,34 @@ python pth2onnx.py
 ```
 python ort.py
 
-285 n02124075 猫, Egyptian cat
-cat.jpg: 285
-cat.jpg score:0.48572447896003723
-infer 100 cost average: 0.057646191120147704
+cat.jpg: 281
+cat.jpg score:0.5740500688552856
+infer 100 cost average: 0.05617419958114624
 ```
 ### 使用tvm(CPU)推理
 ```
 tvmc compile --target llvm resnet18.onnx -o resnet18-cpu.tar
 python tvm_demo_cpu.py
 
-model loaded
-shape_dict:{'input': [32, 3, 224, 224]}
-dtype_dict:{'input': 'float32'}
-285 n02124075 猫, Egyptian cat
-cat.jpg: 285
-cat.jpg score:0.4857271611690521
-infer 100 cost average: 0.39994378328323366
+cat.jpg: 281
+cat.jpg score:0.5740497708320618
+infer 100 cost average: 0.4064192843437195
 ```
 ### 使用tvm(GPU)推理
 ```
 tvmc compile --target cuda resnet18.onnx -o resnet18-cuda.tar
 python tvm_demo_gpu.py
 
-model loaded
-shape_dict:{'input': [32, 3, 224, 224]}
-dtype_dict:{'input': 'float32'}
-285 n02124075 猫, Egyptian cat
-cat.jpg: 285
-cat.jpg score:0.48572424054145813
-infer 100 cost average: 0.019815213680267334
-
+cat.jpg: 281
+cat.jpg score:0.5740503668785095
+infer 100 cost average: 0.01991621971130371
 ```
 ### 使用TVM(CPU)，C++推理
 ```
 apt-get install libopencv-dev
-tar -xvf resnet18-cpu.tar
+tvmc compile --target llvm resnet18.onnx -o resnet18-cpu.tar # 这种编译出来模型在C++中用不了, 应该是参数设置问题, 待解决
+python compile_onnx_cpu.py  # 改变模型编译方式
+
 
 ```
 ### 使用TVM(CUDA)，C++推理
@@ -61,3 +53,7 @@ tar -xvf resnet18-cuda.tar
 
 
 ```
+
+## 参考
+- https://github.com/YiyaoYang1/tvm-riscv-deploy
+- https://tvm.apache.org/docs/how_to/compile_models/from_onnx.html?highlight=onnx

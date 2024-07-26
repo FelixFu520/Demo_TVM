@@ -50,7 +50,20 @@ output = m.get_output(0).asnumpy()
 class_cat = output[0]
 softmax_cat = np.exp(class_cat) / np.sum(np.exp(class_cat))
 index_of_cat = np.argmax(softmax_cat)
-print("285 n02124075 猫, Egyptian cat")
+tips =  """
+TIPS:
+280 n02120505 狐狸, grey fox, gray fox, Urocyon cinereoargenteus
+281 n02123045 猫, tabby, tabby cat
+282 n02123159 猫, tiger cat
+283 n02123394 猫, Persian cat
+284 n02123597 猫, Siamese cat, Siamese
+285 n02124075 猫, Egyptian cat
+286 n02125311 猫, cougar, puma, catamount, mountain lion, painter, panther, Felis concolor
+287 n02127052 猫, lynx, catamount
+288 n02128385 豹, leopard, Panthera pardus
+289 n02128757 豹, snow leopard, ounce, Panthera uncia
+290 n02128925 豹, jaguar, panther, Panthera onca, Felis onca"""
+print(tips)
 print(f"cat.jpg: {index_of_cat}")
 print(f"cat.jpg score:{softmax_cat[index_of_cat]}")
 
@@ -62,13 +75,3 @@ for i in range(100):
     m.run()
 c = time.time() - t0
 print(f"infer 100 cost average: {c/100}")
-
-
-# output
-# model loaded
-# shape_dict:{'input': [32, 3, 224, 224]}
-# dtype_dict:{'input': 'float32'}
-# 285 n02124075 猫, Egyptian cat
-# cat.jpg: 285
-# cat.jpg score:0.4857271611690521
-# infer 100 cost average: 0.38649285316467286 
