@@ -35,9 +35,17 @@ True
 
 
 ```
-
+## 使用Docker
+```
+docker build -t 镜像名称 . -f dockerfile
+docker run -p 主机端口号:22 --name 容器名称 -itd -v /data:/root/data --gpus all --privileged --shm-size=64g 镜像名称
+```
+下面所有操作都是在容器中进行的
 ## 安装依赖环境
-`pip install -r requirements.txt`
+
+```
+pip install -r requirements.txt
+```
 
 ## 安装tvm
 参考: https://siwrc302o4r.feishu.cn/wiki/OB63wVvo1ih0iukOVSWcKDJwneg
