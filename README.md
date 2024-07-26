@@ -44,6 +44,18 @@ infer 100 cost average: 0.01991621971130371
 apt-get install libopencv-dev
 tvmc compile --target llvm resnet18.onnx -o resnet18-cpu.tar # 这种编译出来模型在C++中用不了, 应该是参数设置问题, 待解决
 python compile_onnx_cpu.py  # 改变模型编译方式
+mkdir build
+cd build
+cmake ..
+make
+cd bin
+./demo_tvm_cpu
+******Top 5:
+Batch 0: 281, 0.574050
+Batch 0: 285, 0.174399
+Batch 0: 282, 0.168115
+Batch 0: 287, 0.015327
+Batch 0: 728, 0.013453
 
 
 ```
