@@ -1,4 +1,6 @@
-# TVM DEMO
+# TVM DEMO(Linux)
+视频链接见[B站](https://space.bilibili.com/26362814/channel/series)
+
 各个库版本说明
 ```
 cmake --version
@@ -147,3 +149,6 @@ infer 100 cost time: 0.002790
 ## 参考
 - https://github.com/YiyaoYang1/tvm-riscv-deploy
 - https://tvm.apache.org/docs/how_to/compile_models/from_onnx.html?highlight=onnx
+
+# DEMO TVM(Windows)
+windows 没有单独建项目， 把整个Visual Studio 2022的解决方案上传到百度云了，[链接](https://pan.baidu.com/s/1Jry4ZLiJWb0CN17gZ0hH8A?pwd=h8ae)
